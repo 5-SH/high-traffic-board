@@ -24,5 +24,4 @@ public class ArticleViewCountRepository {
     private String generateKey(Long articleId) {
         return KEY_FORMAT.formatted(articleId);
     }
-
 }
