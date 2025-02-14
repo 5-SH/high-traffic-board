@@ -6,8 +6,6 @@ import traffic.board.common.event.payload.ArticleCreatedEventPayload;
 
 import java.time.LocalDateTime;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class EventTest {
     @Test
     void serde() {
@@ -17,7 +15,7 @@ class EventTest {
                 .content("content")
                 .boardId(1L)
                 .writerId(1L)
-                .createAt(LocalDateTime.now())
+                .createdAt(LocalDateTime.now())
                 .modifiedAt(LocalDateTime.now())
                 .boardArticleCount(23L)
                 .build();
@@ -42,7 +40,7 @@ class EventTest {
         ArticleCreatedEventPayload resultPayload = (ArticleCreatedEventPayload) result.getPayload();
         Assertions.assertThat(resultPayload.getArticleId()).isEqualTo(payload.getArticleId());
         Assertions.assertThat(resultPayload.getTitle()).isEqualTo(payload.getTitle());
-        Assertions.assertThat(resultPayload.getCreateAt()).isEqualTo(payload.getCreateAt());
+        Assertions.assertThat(resultPayload.getCreatedAt()).isEqualTo(payload.getCreatedAt());
     }
 
 }

@@ -18,7 +18,7 @@ public class ArticleDeletedEventPayload implements EventPayload {
     private String content;
     private Long boardId;
     private Long writerId;
-    private LocalDateTime createAt;
+    private LocalDateTime createdAt;
     private LocalDateTime modifiedAt;
     private Long boardArticleCount;
 }

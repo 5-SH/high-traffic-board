@@ -16,7 +16,7 @@ public enum EventType {
     COMMENT_DELETED(CommentDeletedEventPayload.class, Topic.TRAFFIC_BOARD_COMMENT),
     ARTICLE_LINKED(ArticleLikedEventPayload.class, Topic.TRAFFIC_BOARD_LIKE),
     ARTICLE_UNLINKED(ArticleUnlikedEventPayload.class, Topic.TRAFFIC_BOARD_LIKE),
-    ARTICLE_VIEWED(ArticleViewEventPayload.class, Topic.TRAFFIC_BOARD_VIEW);
+    ARTICLE_VIEWED(ArticleViewedEventPayload.class, Topic.TRAFFIC_BOARD_VIEW);
 
     private final Class<? extends EventPayload> payloadClass;
     private final String topic;
