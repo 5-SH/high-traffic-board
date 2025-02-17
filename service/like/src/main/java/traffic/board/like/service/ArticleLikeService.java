@@ -3,6 +3,10 @@ package traffic.board.like.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import traffic.board.common.event.EventType;
+import traffic.board.common.event.payload.ArticleLikedEventPayload;
+import traffic.board.common.event.payload.ArticleUnlikedEventPayload;
+import traffic.board.common.outboxmessagerelay.OutboxEventPublisher;
 import traffic.board.common.snowflake.Snowflake;
 import traffic.board.like.entity.ArticleLike;
 import traffic.board.like.entity.ArticleLikeCount;
@@ -15,6 +19,7 @@ import traffic.board.like.service.response.ArticleLikeResponse;
 public class ArticleLikeService {
     private final Snowflake snowflake = new Snowflake();
     private final ArticleLikeRepository articleLikeRepository;
+    private final OutboxEventPublisher outboxEventPublisher;
     private final ArticleLikeCountRepository articleLikeCountRepository;
 
     public ArticleLikeResponse read(Long articleId, Long userId) {
@@ -28,7 +33,7 @@ public class ArticleLikeService {
      */
     @Transactional
     public void likePessimisticLock1(Long articleId, Long userId) {
-        articleLikeRepository.save(
+        ArticleLike articleLike = articleLikeRepository.save(
                 ArticleLike.create(
                         snowflake.nextId(),
                         articleId,
@@ -42,6 +47,18 @@ public class ArticleLikeService {
             // 트래픽이 순식간에 몰릴 수 있는 상황에는 유실될 수 있으므로, 게시글 생성 시점에 미리 0으로 초기화 해둘 수도 있다.
             articleLikeCountRepository.save(ArticleLikeCount.init(articleId, 1L));
         }
+
+        outboxEventPublisher.publish(
+                EventType.ARTICLE_LINKED,
+                ArticleLikedEventPayload.builder()
+                        .articleLikeId(articleLike.getArticleLikeId())
+                        .articleId(articleLike.getArticleId())
+                        .userId(articleLike.getUserId())
+                        .createdAt(articleLike.getCreatedAt())
+                        .articleLikeCount(count(articleLike.getArticleId()))
+                        .build(),
+                articleLike.getArticleId()
+        );
     }
 
     @Transactional
@@ -50,6 +67,18 @@ public class ArticleLikeService {
                 .ifPresent(articleLike -> {
                     articleLikeRepository.delete(articleLike);
                     articleLikeCountRepository.decrease(articleId);
+
+                    outboxEventPublisher.publish(
+                            EventType.ARTICLE_UNLINKED,
+                            ArticleUnlikedEventPayload.builder()
+                                    .articleLikeId(articleLike.getArticleLikeId())
+                                    .articleId(articleLike.getArticleId())
+                                    .userId(articleLike.getUserId())
+                                    .createdAt(articleLike.getCreatedAt())
+                                    .articleLikeCount(count(articleLike.getArticleId()))
+                                    .build(),
+                            articleLike.getArticleId()
+                    );
                 });
     }
 

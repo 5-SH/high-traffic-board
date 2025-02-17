@@ -18,7 +18,7 @@ public class ArticleUnlikedEventHandler implements EventHandler<ArticleUnlikedEv
         ArticleUnlikedEventPayload payload = event.getPayload();
         articleLikeCountRepository.createOrUpdate(
                 payload.getArticleId(),
-                payload.getArticleLIkeCount(),
+                payload.getArticleLikeCount(),
                 TimeCalculatorUtils.calculateDurationToMidnight()
         );
     }

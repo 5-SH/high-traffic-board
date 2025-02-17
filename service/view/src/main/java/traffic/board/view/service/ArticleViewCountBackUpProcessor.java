@@ -3,12 +3,16 @@ package traffic.board.view.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+import traffic.board.common.event.EventType;
+import traffic.board.common.event.payload.ArticleViewedEventPayload;
+import traffic.board.common.outboxmessagerelay.OutboxEventPublisher;
 import traffic.board.view.entity.ArticleViewCount;
 import traffic.board.view.repository.ArticleViewCountBackUpRepository;
 
 @Component
 @RequiredArgsConstructor
 public class ArticleViewCountBackUpProcessor {
+    private final OutboxEventPublisher outboxEventPublisher;
     private final ArticleViewCountBackUpRepository articleViewCountBackUpRepository;
 
     @Transactional
@@ -19,6 +23,15 @@ public class ArticleViewCountBackUpProcessor {
                     .ifPresentOrElse(ignored -> { },
                             () -> articleViewCountBackUpRepository.save(ArticleViewCount.init(articleId, viewCount)));
         }
+
+        outboxEventPublisher.publish(
+                EventType.ARTICLE_VIEWED,
+                ArticleViewedEventPayload.builder()
+                        .articleId(articleId)
+                        .articleViewCount(viewCount)
+                        .build(),
+                articleId
+        );
 
     }
 }

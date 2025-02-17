@@ -17,5 +17,5 @@ public class ArticleLikedEventPayload implements EventPayload {
     private Long articleId;
     private Long userId;
     private LocalDateTime createdAt;
-    private Long articleLIkeCount;
+    private Long articleLikeCount;
 }
