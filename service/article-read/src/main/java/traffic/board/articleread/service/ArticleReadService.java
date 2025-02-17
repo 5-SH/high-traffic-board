@@ -38,9 +38,14 @@ public class ArticleReadService {
     }
 
     public ArticleReadResponse read(Long articleId) {
-        articleQueryModelRepository.read(articleId)
+        ArticleQueryModel articleQueryModel = articleQueryModelRepository.read(articleId)
                 .or(() -> fetch(articleId))
                 .orElseThrow();
+
+        return ArticleReadResponse.from(
+                articleQueryModel,
+                viewClient.count(articleId)
+        );
     }
 
     private Optional<ArticleQueryModel> fetch(Long articleId) {
