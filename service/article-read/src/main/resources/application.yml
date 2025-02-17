@@ -1,1 +1,24 @@
 server.port: 9005
+spring:
+  application:
+    name: traffic-board-article-read-service
+  data:
+    redis:
+      host: 127.0.0.1
+      port: 6379
+  kafka:
+    bootstrap-servers: 127.0.0.1:9092
+    consumer:
+      group-id: traffic-board-article-read-service
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      enable-auto-commit: false
+endpoints:
+  traffic-board-article-service:
+    url: http://127.0.0.1:9000
+  traffic-board-comment-service:
+    url: http://127.0.0.1:9301
+  traffic-board-like-service:
+    url: http://127.0.0.1:9002
+  traffic-board-view-service:
+    url: http://127.0.0.1:9003
