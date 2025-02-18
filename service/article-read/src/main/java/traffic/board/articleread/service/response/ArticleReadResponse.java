@@ -29,6 +29,7 @@ public class ArticleReadResponse {
         response.writerId = articleQueryModel.getWriterId();
         response.createdAt = articleQueryModel.getCreatedAt();
         response.modifiedAt = articleQueryModel.getModifiedAt();
+        response.articleCommentCount = articleQueryModel.getArticleCommentCount();
         response.articleLikeCount = articleQueryModel.getArticleLikeCount();
         response.articleViewCount = viewCount;
         return response;

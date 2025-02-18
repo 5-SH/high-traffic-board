@@ -48,7 +48,8 @@ public class MessageRelay {
         outboxRepository.delete(outbox);
     }
 
-    @Scheduled(
+    @
+            Scheduled(
             fixedDelay = 10,
             initialDelay = 5,
             timeUnit = TimeUnit.SECONDS,

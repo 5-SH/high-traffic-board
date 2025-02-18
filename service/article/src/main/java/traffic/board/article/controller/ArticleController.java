@@ -40,7 +40,7 @@ public class ArticleController {
     }
 
     @PostMapping("/v1/articles")
-    public ArticleResponse creat(@RequestBody ArticleCreateRequest request) {
+    public ArticleResponse create(@RequestBody ArticleCreateRequest request) {
         return articleService.create(request);
     }
 

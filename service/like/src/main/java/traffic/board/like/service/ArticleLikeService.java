@@ -49,7 +49,7 @@ public class ArticleLikeService {
         }
 
         outboxEventPublisher.publish(
-                EventType.ARTICLE_LINKED,
+                EventType.ARTICLE_LIKED,
                 ArticleLikedEventPayload.builder()
                         .articleLikeId(articleLike.getArticleLikeId())
                         .articleId(articleLike.getArticleId())
@@ -69,7 +69,7 @@ public class ArticleLikeService {
                     articleLikeCountRepository.decrease(articleId);
 
                     outboxEventPublisher.publish(
-                            EventType.ARTICLE_UNLINKED,
+                            EventType.ARTICLE_UNLIKED,
                             ArticleUnlikedEventPayload.builder()
                                     .articleLikeId(articleLike.getArticleLikeId())
                                     .articleId(articleLike.getArticleId())

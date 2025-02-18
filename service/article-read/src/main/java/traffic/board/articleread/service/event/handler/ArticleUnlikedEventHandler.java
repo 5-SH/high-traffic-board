@@ -5,7 +5,6 @@ import org.springframework.stereotype.Component;
 import traffic.board.articleread.repository.ArticleQueryModelRepository;
 import traffic.board.common.event.Event;
 import traffic.board.common.event.EventType;
-import traffic.board.common.event.payload.ArticleLikedEventPayload;
 import traffic.board.common.event.payload.ArticleUnlikedEventPayload;
 
 @Component
@@ -24,6 +23,6 @@ public class ArticleUnlikedEventHandler implements EventHandler<ArticleUnlikedEv
 
     @Override
     public boolean supports(Event<ArticleUnlikedEventPayload> event) {
-        return EventType.ARTICLE_LINKED == event.getType();
+        return EventType.ARTICLE_UNLIKED == event.getType();
     }
 }

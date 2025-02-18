@@ -25,7 +25,7 @@ public class ArticleLikedEventHandler implements EventHandler<ArticleLikedEventP
 
     @Override
     public boolean supports(Event<ArticleLikedEventPayload> event) {
-        return EventType.ARTICLE_LINKED == event.getType();
+        return EventType.ARTICLE_LIKED == event.getType();
     }
 
     @Override

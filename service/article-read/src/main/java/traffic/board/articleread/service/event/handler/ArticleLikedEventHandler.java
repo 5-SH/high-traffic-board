@@ -6,7 +6,6 @@ import traffic.board.articleread.repository.ArticleQueryModelRepository;
 import traffic.board.common.event.Event;
 import traffic.board.common.event.EventType;
 import traffic.board.common.event.payload.ArticleLikedEventPayload;
-import traffic.board.common.event.payload.CommentCreatedEventPayload;
 
 @Component
 @RequiredArgsConstructor
@@ -24,6 +23,6 @@ public class ArticleLikedEventHandler implements EventHandler<ArticleLikedEventP
 
     @Override
     public boolean supports(Event<ArticleLikedEventPayload> event) {
-        return EventType.ARTICLE_LINKED == event.getType();
+        return EventType.ARTICLE_LIKED == event.getType();
     }
 }

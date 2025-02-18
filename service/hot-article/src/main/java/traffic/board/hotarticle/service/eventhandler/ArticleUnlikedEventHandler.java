@@ -25,7 +25,7 @@ public class ArticleUnlikedEventHandler implements EventHandler<ArticleUnlikedEv
 
     @Override
     public boolean supports(Event<ArticleUnlikedEventPayload> event) {
-        return EventType.ARTICLE_UNLINKED == event.getType();
+        return EventType.ARTICLE_UNLIKED == event.getType();
     }
 
     @Override

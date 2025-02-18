@@ -16,7 +16,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class ArticleClient {
     private RestClient restClient;
-    @Value("{endpoints.traffic-board-article-service-url}")
+    @Value("${endpoints.traffic-board-article-service.url}")
     private String articleServiceUrl;
 
     @PostConstruct
@@ -27,7 +27,7 @@ public class ArticleClient {
     public Optional<ArticleResponse> read(Long articleId) {
         try {
             ArticleResponse articleResponse = restClient.get()
-                    .uri("/v1/articles/{articleId", articleId)
+                    .uri("/v1/articles/{articleId}", articleId)
                     .retrieve()
                     .body(ArticleResponse.class);
             return Optional.ofNullable(articleResponse);
