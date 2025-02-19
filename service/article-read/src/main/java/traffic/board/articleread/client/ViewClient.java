@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClient;
+import traffic.board.articleread.cache.OptimizedCacheable;
 
 @Slf4j
 @Component
@@ -26,7 +27,8 @@ public class ViewClient {
      * 레디스에 데이터가 없었다면, count 메소드 내부 로직이 호출 되면서, viewService로 원본 데이터를 요청한다. 그리고 레디스에 데이터를 넣고 응답한다.
      * 레디스에 데이터가 있었다면 그 데이터를 그대로 반환한다.
      */
-    @Cacheable(key = "#articleId", value = "articleViewCount")
+//    @Cacheable(key = "#articleId", value = "articleViewCount")
+    @OptimizedCacheable(type = "articleViewCount", ttlSeconds = 1)
     public long count(Long articleId) {
         log.info("[ViewClient.count] articleId={}", articleId);
         try {

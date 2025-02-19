@@ -29,6 +29,39 @@ public class DataInitializer {
         }
     }
 
+    /**
+     * articleId = 150414349784850432
+     * articleId = 150414521352855552
+     * articleId = 150414530903285760
+     * articleId = 150414540487270400
+     * articleId = 150414551186939904
+     * articleId = 150414562591252480
+     * articleId = 150414566148022272
+     * articleId = 150414583868956672
+     * articleId = 150414599895392256
+     * articleId = 150414619205967872
+     * articleId = 150414659148324864
+     * articleId = 150414684024741888
+     * articleId = 150414695869456384
+     * articleId = 150414709811322880
+     * articleId = 150414747107074048
+     * articleId = 150414796469837824
+     * articleId = 150414815407120384
+     * articleId = 150414834973548544
+     * articleId = 150414843194384384
+     * articleId = 150414849343234048
+     * articleId = 150414861913563136
+     * articleId = 150414870193119232
+     * articleId = 150414874869768192
+     * articleId = 150414885011595264
+     * articleId = 150414898261401600
+     * articleId = 150414925922836480
+     * articleId = 150414945199857664
+     * articleId = 150414952120459264
+     * articleId = 150414970210492416
+     * articleId = 150414972827738112
+     */
+
     void createComment(Long articleId, long commentCount) {
         while (commentCount-- > 0) {
             commentServiceClient.post()

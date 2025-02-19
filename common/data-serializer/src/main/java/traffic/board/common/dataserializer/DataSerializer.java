@@ -24,7 +24,7 @@ public final class DataSerializer {
             return objectMapper.readValue(data, clazz);
         } catch (JsonProcessingException e) {
             log.error("[DataSerializer.deserialize] data={}, clazz={}", data, clazz, e);
-            throw null;
+            return null;
         }
     }
 
