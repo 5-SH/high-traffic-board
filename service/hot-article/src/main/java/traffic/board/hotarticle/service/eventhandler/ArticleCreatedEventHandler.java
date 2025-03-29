@@ -16,7 +16,7 @@ public class ArticleCreatedEventHandler implements EventHandler<ArticleCreatedEv
     @Override
     public void handle(Event<ArticleCreatedEventPayload> event) {
         ArticleCreatedEventPayload payload = event.getPayload();
-        articleCreatedTimeRepository.createOfUpdate(
+        articleCreatedTimeRepository.createOrUpdate(
                 payload.getArticleId(),
                 payload.getCreatedAt(),
                 TimeCalculatorUtils.calculateDurationToMidnight()

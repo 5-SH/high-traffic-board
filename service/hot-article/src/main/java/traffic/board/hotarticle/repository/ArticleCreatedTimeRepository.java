@@ -17,7 +17,7 @@ public class ArticleCreatedTimeRepository {
     // hot-article::article::{articleId}::created-time
     private static final String KEY_FORMAT = "hot-article::article::{articleId}::created-time";
 
-    public void createOfUpdate(Long articleId, LocalDateTime createdAt, Duration ttl) {
+    public void createOrUpdate(Long articleId, LocalDateTime createdAt, Duration ttl) {
          redisTemplate.opsForValue().set(
                  generateKey(articleId),
                  String.valueOf(createdAt.toInstant(ZoneOffset.UTC).toEpochMilli()),
