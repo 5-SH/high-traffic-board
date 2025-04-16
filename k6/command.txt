@@ -1,0 +1,2 @@
+k6 run --out web-dashboard=export=article-read-report.html article-read-breakpoint-testing.js
+k6 run --out web-dashboard=export=article-report.html article-breakpoint-testing.js
