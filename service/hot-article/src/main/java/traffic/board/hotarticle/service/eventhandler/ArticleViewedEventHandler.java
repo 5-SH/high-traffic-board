@@ -10,7 +10,7 @@ import traffic.board.hotarticle.utils.TimeCalculatorUtils;
 
 @Component
 @RequiredArgsConstructor
-public class ArticleViewEventHandler implements EventHandler<ArticleViewedEventPayload> {
+public class ArticleViewedEventHandler implements EventHandler<ArticleViewedEventPayload> {
     private final ArticleViewCountRepository articleViewCountRepository;
 
     @Override

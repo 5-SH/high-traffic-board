@@ -34,6 +34,11 @@ export default function () {
             const article = parseHelper(articleResponse.body);
             console.log('article:', article);
 
+            
+            const randomUserId = Math.floor(Math.random() * 1000);
+            const viewResponse = http.post(`http://localhost:9003/v1/article-views/articles/${id}/users/${randomUserId}`);
+            check(viewResponse, { 'status was 200': r => r.status === 200 });
+
             sleep(1);
         });
     });

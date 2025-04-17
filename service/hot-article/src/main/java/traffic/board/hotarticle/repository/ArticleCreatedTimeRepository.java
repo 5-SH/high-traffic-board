@@ -15,7 +15,7 @@ public class ArticleCreatedTimeRepository {
     private final StringRedisTemplate redisTemplate;
 
     // hot-article::article::{articleId}::created-time
-    private static final String KEY_FORMAT = "hot-article::article::{articleId}::created-time";
+    private static final String KEY_FORMAT = "hot-article::article::%s::created-time";
 
     public void createOrUpdate(Long articleId, LocalDateTime createdAt, Duration ttl) {
          redisTemplate.opsForValue().set(
